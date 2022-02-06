@@ -2,11 +2,23 @@ import { StyleSheet } from 'react-native';
 
 
 export const styles = StyleSheet.create({
-    container: {
+    button:{
+      textAlign: "center",
+      backgroundColor: "lightblue",
+      width: 75,
+      height: 25,
+    },
+
+    buttonRow:{
+      alignItems: "center",
+    },
+  
+  container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      paddingTop:50,
+      // alignItems: 'center',
+      // justifyContent: 'center',
     },
 
     input: {
@@ -16,5 +28,5 @@ export const styles = StyleSheet.create({
       padding: 10,
       width: "85%",
     },
-
+    
   });

@@ -1,23 +1,33 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import {
+  ScrollView,
   Text,
   View,
   TextInput,
   TouchableOpacity,
   Pressable,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { styles } from "./styles";
 
-function handleChange(func, text) {
+
+function handleSubmit(func, text){
   func(text);
 }
 
+
+
+
 export default function App() {
   const [activeEdit, setActiveEdit] = useState(null);
+  const [activeEditText, setActiveEditText] = useState("");
   const [editWindowOpen, setEditWindowOpen] = useState(false);
+
 
   const [styleText, setStyleText] = useState("Diner Drip");
   const [brandText, setBrandText] = useState("Coffee brand");
@@ -25,112 +35,135 @@ export default function App() {
   const [grindText, setGrindText] = useState("Grind settings");
   const [waterTempText, setWaterTempText] = useState("Water temp");
 
+  const [loadedRecipe, setLoadedRecipe] = useState({style: "", brand: "", roast: "", grind: "", waterTemp: ""})
+  
+
+  async function storeData() {
+    let value = {style: styleText,
+                  brand: brandText,
+                roast: roastText,
+              grind: grindText,
+            waterTemp: waterTempText}
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('storedRecipe', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  async function loadData() {
+    try {
+      await AsyncStorage.getItem('storedRecipe')
+      .then((value) => JSON.parse(value))
+      .then((value) => setLoadedRecipe(value));
+    } catch(e) {
+      // error reading value
+    }
+  }
+
+
+  
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar style="auto" />
+      
+      
       <Text>Style: </Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("style");
+          setActiveEdit("setStyleText");
+          setActiveEditText(styleText);
         }}
       >
         <Text>{styleText}</Text>
       </TouchableOpacity>
-
-      {editWindowOpen && activeEdit == "style" ? (
-        <TextInput
-          autoFocus={true}
-          style={styles.input}
-          value={styleText}
-          onChangeText={(text) => handleChange(setStyleText, text)}
-          onEndEditing={() => setEditWindowOpen(false)}
-        />
-      ) : null}
+      
       <Text>{"\n"}</Text>
+      
+      
 
       <Text>Coffee Brand: </Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("brand");
+          setActiveEdit("setBrandText");
+          setActiveEditText(brandText);
         }}
       >
         <Text>{brandText}</Text>
       </TouchableOpacity>
-      {editWindowOpen && activeEdit == "brand" ? (
-        <TextInput
-          autoFocus={true}
-          style={styles.input}
-          value={brandText}
-          onChangeText={(text) => handleChange(setBrandText, text)}
-          onEndEditing={() => setEditWindowOpen(false)}
-        />
-      ) : null}
+      
       <Text>{"\n"}</Text>
 
-      <Text>Roast Style: </Text>
+      
+
+      <Text>Roast:</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("roast");
+          setActiveEdit("setRoastText");
+          setActiveEditText(roastText);
         }}
       >
         <Text>{roastText}</Text>
       </TouchableOpacity>
-      {editWindowOpen && activeEdit == "roast" ? (
-        <TextInput
-          autoFocus={true}
-          style={styles.input}
-          value={roastText}
-          onChangeText={(text) => handleChange(setRoastText, text)}
-          onEndEditing={() => setEditWindowOpen(false)}
-        />
-      ) : null}
+      
       <Text>{"\n"}</Text>
 
-      <Text>Grind Info: </Text>
+      <Text>Grind:</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("grind");
+          setActiveEdit("setGrindText");
+          setActiveEditText(grindText);
         }}
       >
         <Text>{grindText}</Text>
       </TouchableOpacity>
-      {editWindowOpen && activeEdit == "grind" ? (
-        <TextInput
-          autoFocus={true}
-          style={styles.input}
-          value={grindText}
-          onChangeText={(text) => handleChange(setGrindText, text)}
-          onEndEditing={() => setEditWindowOpen(false)}
-        />
-      ) : null}
+      
       <Text>{"\n"}</Text>
 
-      <Text>Water Temp: </Text>
+      <Text>Water Temp:</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("waterTemp");
+          setActiveEdit("setWaterTempText");
+          setActiveEditText(waterTempText);
         }}
       >
         <Text>{waterTempText}</Text>
       </TouchableOpacity>
-      {editWindowOpen && activeEdit == "waterTemp" ? (
+      <KeyboardAvoidingView>
+{editWindowOpen && 
         <TextInput
-          autoFocus={true}
-          style={styles.input}
-          value={waterTempText}
-          onChangeText={(text) => handleChange(setWaterTempText, text)}
-          onEndEditing={() => setEditWindowOpen(false)}
-        />
-      ) : null}
+        autoFocus={true}
+        selectTextOnFocus={true}
+        style={styles.input}
+        value={activeEditText}
+        onChangeText={setActiveEditText}
+        onEndEditing={() => {setEditWindowOpen(false);handleSubmit(eval(activeEdit), activeEditText)}}>
+        </TextInput>}
+        </KeyboardAvoidingView>
+    
+      <TouchableOpacity
+      onPress={()=>{alert("saved?");storeData()}}
+      style={styles.buttonRow}><Text style={styles.button}>Save</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+      onPress={()=>{alert("loaded?");loadData()}}
+      style={styles.buttonRow}><Text style={styles.button}>Load</Text>
+      </TouchableOpacity>
+      
       <Text>{"\n"}</Text>
 
+
+        <Text>Style: {loadedRecipe.style} / Brand: {loadedRecipe.brand} / Roast: {loadedRecipe.roast}
+        Grind: {loadedRecipe.grind} / Water Temp: {loadedRecipe.waterTemp}</Text>
       
-      <Text>water temp; brew time; dose weight, water volume, General notes</Text>
-    </View>
+    </ScrollView>
+
+
   );
 }
