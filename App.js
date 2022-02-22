@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -41,6 +41,7 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+  const [onLoad, setOnLoad] = useState(false);
   const [activeEdit, setActiveEdit] = useState(null);
   const [activeEditText, setActiveEditText] = useState("");
   const [editWindowOpen, setEditWindowOpen] = useState(false);
@@ -54,6 +55,16 @@ export default function App() {
 
   const [loadedRecipe, setLoadedRecipe] = useState({style: "", brand: "", roast: "", grind: "", waterTemp: ""})
   const [modalRecipeVisible, setModalRecipeVisible] = useState(false);
+  const [loadedRecipeArray, setLoadedRecipeArray] = useState([
+    {
+      style: "default style",
+      brand: "default brand",
+      roast: "default roast",
+      grind: "default grind",
+      waterTemp: "default waterTemp",
+    },
+  ]);
+
 
   async function storeData() {
     let value = {style: styleText,
@@ -79,7 +90,37 @@ export default function App() {
     }
   }
 
+  async function getArray() {
+    (await AsyncStorage.getItem("recipeList")) != null
+      ? AsyncStorage.getItem("recipeList")
+          .then((value) => JSON.parse(value))
+          .then((value) => setLoadedRecipeArray(value))
+      : AsyncStorage.setItem("recipeList", JSON.stringify(defaultRecipe));
+    setLoadedRecipeArray(defaultRecipe);
+  }
 
+  const defaultRecipe = [
+    {
+      style: "styleText",
+                  brand: "brandText",
+                roast: "roastText",
+              grind: "grindText",
+            waterTemp: "waterTempText"
+    },
+  ];
+
+  useEffect(() => {
+    
+    onLoad == false ? loadStartupRecipe() : null;
+  });
+
+
+  function loadStartupRecipe() {
+    setOnLoad(true);
+    getArray();
+  }
+
+  const displayArray = loadedRecipeArray.map((value, index) => (<Text key={index}>Style: {value.style}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
   
   return (
     <NavigationContainer>
@@ -201,10 +242,9 @@ export default function App() {
       </View>
       </Modal>
       
+{displayArray}
 
-
-        <Text>Style: {loadedRecipe.style} / Brand: {loadedRecipe.brand} / Roast: {loadedRecipe.roast}
-        Grind: {loadedRecipe.grind} / Water Temp: {loadedRecipe.waterTemp}</Text>
+       
         <Button
         title="activate modal"
         onPress={()=>setModalRecipeVisible(!modalRecipeVisible)}></Button>
