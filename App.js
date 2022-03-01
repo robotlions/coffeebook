@@ -27,15 +27,15 @@ function handleSubmit(func, text){
 const HomeScreen = ({ navigation }) => {
   return (
     <Button
-      title="Go to Jane's profile"
+      title="Pourover"
       onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
+        navigation.navigate('Recipe', { name: 'pourover' })
       }
     />
   );
 };
-const ProfileScreen = ({ navigation, route }) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
+const RecipeScreen = ({ navigation, route }) => {
+  return <Text>These are {route.params.name} recipes</Text>;
 };
 const Stack = createNativeStackNavigator();
 
@@ -131,7 +131,7 @@ export default function App() {
       component={HomeScreen}
       options={{ title: 'Welcome' }}
     />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
+    <Stack.Screen name="Recipe" component={RecipeScreen} />
   </Stack.Navigator>
     <ScrollView style={styles.container}>
       <StatusBar style="auto" />
