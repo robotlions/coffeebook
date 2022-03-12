@@ -1,9 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import {
   ScrollView,
   Text,
@@ -17,27 +11,42 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { styles } from "./styles";
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+
+import { styles } from "./styles";
+import {HomeScreen} from './Components/HomeScreen';
+import {defaultRecipe} from './Components/DefaultRecipes';
+import {testLoadArray} from './Components/DefaultRecipes';
 
 function handleSubmit(func, text){
   func(text);
 }
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Pourover"
-      onPress={() =>
-        navigation.navigate('Recipe', { name: 'pourover' })
-      }
-    />
-  );
-};
+
+// const RecipeScreen = ({ navigation, route }) => {
+//   return <Text>These are {route.params.filter} recipes
+//   </Text>;
+// };
+
 const RecipeScreen = ({ navigation, route }) => {
-  return <Text>These are {route.params.name} recipes</Text>;
+  return <ScrollView>
+<Text>
+  {route.params.filter}</Text>
+  <Text>
+  {testLoadArray.map((value, index) => (route.params.filter == value.method && <Text key={index}>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}{"\n"}{"\n"}</Text>))}
+</Text>
+  </ScrollView>
 };
+
+
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 
 export default function App() {
@@ -47,17 +56,17 @@ export default function App() {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
 
 
-  const [styleText, setStyleText] = useState("Diner Drip");
+  const [methodText, setMethodText] = useState("Diner Drip");
   const [brandText, setBrandText] = useState("Coffee brand");
   const [roastText, setRoastText] = useState("Roast type");
   const [grindText, setGrindText] = useState("Grind settings");
   const [waterTempText, setWaterTempText] = useState("Water temp");
 
-  const [loadedRecipe, setLoadedRecipe] = useState({style: "", brand: "", roast: "", grind: "", waterTemp: ""})
+  const [loadedRecipe, setLoadedRecipe] = useState({method: "", brand: "", roast: "", grind: "", waterTemp: ""})
   const [modalRecipeVisible, setModalRecipeVisible] = useState(false);
   const [loadedRecipeArray, setLoadedRecipeArray] = useState([
     {
-      style: "default style",
+      method: "default method",
       brand: "default brand",
       roast: "default roast",
       grind: "default grind",
@@ -66,8 +75,9 @@ export default function App() {
   ]);
 
 
+
   async function storeData() {
-    let value = {style: styleText,
+    let value = {method: methodText,
                   brand: brandText,
                 roast: roastText,
               grind: grindText,
@@ -99,15 +109,32 @@ export default function App() {
     setLoadedRecipeArray(defaultRecipe);
   }
 
-  const defaultRecipe = [
-    {
-      style: "styleText",
-                  brand: "brandText",
-                roast: "roastText",
-              grind: "grindText",
-            waterTemp: "waterTempText"
-    },
-  ];
+  async function saveRecipe() {
+    const newRecipe = {
+      recipeName: recipeName,
+      ratio: ratio,
+      grindSize: grindSize,
+      agitation: agitation,
+      temperature: temperature,
+      brewStyle: brewStyle,
+    };
+    let loadedRecipe;
+    (await AsyncStorage.getItem("recipeList")) == null
+      ? AsyncStorage.setItem("recipeList", JSON.stringify(newRecipe))
+      : AsyncStorage.getItem("recipeList")
+          .then((value) => JSON.parse(value))
+          .then((value) => (loadedRecipe = value))
+          .then(() => loadedRecipe.push(newRecipe))
+          .then(() =>
+            AsyncStorage.setItem("recipeList", JSON.stringify(loadedRecipe))
+          )
+          .then(() => getArray());
+    
+    alert("Recipe Added!");
+    
+  }
+
+  
 
   useEffect(() => {
     
@@ -120,8 +147,10 @@ export default function App() {
     getArray();
   }
 
-  const displayArray = loadedRecipeArray.map((value, index) => (<Text key={index}>Style: {value.style}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
+  const displayArray = loadedRecipeArray.map((value, index) => (<Text key={index}>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
+  // const displayArray = testLoadArray.map((value, index) => (<Text key={index}>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
   
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -146,15 +175,15 @@ export default function App() {
       >
         <View style={styles.backgroundView}>
         <View style={styles.modalView}>
-      <Text style={styles.recipeHeadline}>Style: </Text>
+      <Text style={styles.recipeHeadline}>Method: </Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
-          setActiveEdit("setStyleText");
-          setActiveEditText(styleText);
+          setActiveEdit("setMethodText");
+          setActiveEditText(methodText);
         }}
       >
-        <Text style={styles.textLine}>{styleText}</Text>
+        <Text style={styles.textLine}>{methodText}</Text>
       </TouchableOpacity>
       
     
@@ -251,8 +280,9 @@ export default function App() {
     </ScrollView>
     
     
-    
+
     </NavigationContainer>
+    
 
 
   );
