@@ -29,10 +29,6 @@ export const NewRecipe = ({ navigation, route }) => {
   const [editWindowOpen, setEditWindowOpen] = useState(false);
 
 
-
-
-  const [loadedRecipe, setLoadedRecipe] = useState({ method: "", brand: "", roast: "", grind: "", waterTemp: "" })
-
   const [loadedRecipeArray, setLoadedRecipeArray] = useState([
     {
       method: "default method",

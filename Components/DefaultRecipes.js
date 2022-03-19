@@ -22,7 +22,10 @@ export const defaultRecipe = [
     brand: "brandText",
     roast: "roastText",
     grind: "grindText",
-    waterTemp: "waterTempText"
+    waterTemp: "waterTempText",
+    agitation: "agitation",
+    waterType: "waterType",
+    notes: "notes",
   },
 ];
 

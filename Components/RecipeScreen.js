@@ -17,7 +17,7 @@ export const RecipeScreen = ({ navigation, route}) => {
 
     function activateModal(value){
         setModalVisible(true);
-        setLoadedArray({method:value.method,brand:value.brand,roast:value.roast,grind:value.grind,waterTemp:value.waterTemp})
+        setLoadedArray({method:value.method,brand:value.brand,roast:value.roast,grind:value.grind,waterTemp:value.waterTemp,agitation:value.agitation,waterType:value.waterType,notes:value.notes})
     }
 
     async function getArray() {
@@ -75,7 +75,16 @@ export const RecipeScreen = ({ navigation, route}) => {
   <Text>
     {route.params.filter}{"\n"}</Text>
     <Text>
-    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <Text key={index}><TouchableOpacity style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}><Text>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}{"\n"}{"\n"}</Text></TouchableOpacity>{"\n"}</Text>))}
+    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <Text key={index}><TouchableOpacity style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}>
+      <Text>Method: {value.method}{"\n"}
+      Brand: {value.brand}{"\n"}
+      Roast: {value.roast}{"\n"}
+      Grind: {value.grind}{"\n"}
+      Water Temp: {value.waterTemp}{"\n"}
+      Agitation: {value.agitation}{"\n"}
+      Water Type: {value.waterType}{"\n"}
+      Notes: {value.notes}{"\n"}
+      {"\n"}</Text></TouchableOpacity>{"\n"}</Text>))}
   </Text>
     </ScrollView>
 
@@ -94,7 +103,10 @@ export const RecipeScreen = ({ navigation, route}) => {
             <Text>Brand: {loadedArray.brand}</Text>
             <Text>Roast: {loadedArray.roast}</Text>
             <Text>Grind: {loadedArray.grind}</Text>
-            <Text>Water Temp: {loadedArray.waterTemp}{"\n"}</Text>
+            <Text>Water Temp: {loadedArray.waterTemp}</Text>
+            <Text>Agitaiton: {loadedArray.agitation}</Text>
+            <Text>Water Type: {loadedArray.waterType}</Text>
+            <Text>Notes: {loadedArray.notes}{"\n"}</Text>
             <TouchableOpacity onPress={()=>setModalVisible(false)}><Text>Close Modal</Text></TouchableOpacity>
             </View></View></Modal>
 
