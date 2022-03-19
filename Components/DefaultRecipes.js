@@ -1,3 +1,21 @@
+export const newRecipeObject = {
+method: "",
+equipment: "",
+filterType: "",
+brand: "",
+roast: "",
+grind: "",
+waterTemp: "",
+agitation: "",
+waterType: "",
+notes: "",
+
+
+};
+
+
+
+
 export const defaultRecipe = [
   {
     method: "methodText",

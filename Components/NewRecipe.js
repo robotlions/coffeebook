@@ -14,12 +14,15 @@ export const NewRecipe = ({ navigation, route }) => {
 
   const [onLoad, setOnLoad] = useState(false);
 
-  const [methodText, setMethodText] = useState("Diner Drip");
-  const [brandText, setBrandText] = useState("Coffee brand");
-  const [roastText, setRoastText] = useState("Roast type");
-  const [grindText, setGrindText] = useState("Grind settings");
-  const [waterTempText, setWaterTempText] = useState("Water temp");
-  const [selectedMethod, setSelectedMethod] = useState("default method");
+  const [recipeNameText, setRecipeName] = useState("New Recipe");
+  const [methodText, setMethodText] = useState("");
+  const [brandText, setBrandText] = useState("");
+  const [roastText, setRoastText] = useState("");
+  const [grindText, setGrindText] = useState("");
+  const [waterTempText, setWaterTempText] = useState("");
+  const [agitationText, setAgitationText] = useState("");
+  const [waterTypeText, setWaterTypeText] = useState("");
+  const [notesText, setNotesText] = useState("");
 
   const [activeEdit, setActiveEdit] = useState(null);
   const [activeEditText, setActiveEditText] = useState("");
@@ -93,8 +96,19 @@ export const NewRecipe = ({ navigation, route }) => {
   return (
     <View style={styles.recipeContainer}>
 
+<Text style={styles.recipeHeadline}>Recipe Name</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setRecipeNameText");
+          setActiveEditText(recipeNameText);
+        }}
+      >
+        <Text style={styles.textLine}>{recipeNameText}</Text>
+      </TouchableOpacity>
 
-      <Text style={styles.recipeHeadline}>Method: </Text>
+
+      <Text style={styles.recipeHeadline}>Method</Text>
       <Picker
   selectedValue={methodText}
   onValueChange={(itemValue, itemIndex) =>
@@ -112,7 +126,7 @@ export const NewRecipe = ({ navigation, route }) => {
       
 
 
-      <Text style={styles.recipeHeadline}>Coffee Brand: </Text>
+      <Text style={styles.recipeHeadline}>Coffee Brand</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
@@ -124,10 +138,7 @@ export const NewRecipe = ({ navigation, route }) => {
       </TouchableOpacity>
 
 
-
-
-
-      <Text style={styles.recipeHeadline}>Roast:</Text>
+      <Text style={styles.recipeHeadline}>Roast</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
@@ -139,8 +150,7 @@ export const NewRecipe = ({ navigation, route }) => {
       </TouchableOpacity>
 
 
-
-      <Text style={styles.recipeHeadline}>Grind:</Text>
+      <Text style={styles.recipeHeadline}>Grind</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
@@ -152,8 +162,7 @@ export const NewRecipe = ({ navigation, route }) => {
       </TouchableOpacity>
 
 
-
-      <Text style={styles.recipeHeadline}>Water Temp:</Text>
+      <Text style={styles.recipeHeadline}>Water Temp</Text>
       <TouchableOpacity
         onPress={() => {
           setEditWindowOpen(!editWindowOpen);
@@ -163,6 +172,59 @@ export const NewRecipe = ({ navigation, route }) => {
       >
         <Text style={styles.textLine}>{waterTempText}</Text>
       </TouchableOpacity>
+
+
+      <Text style={styles.recipeHeadline}>Agitation</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setAgitationText");
+          setActiveEditText(agitationText);
+        }}
+      >
+        <Text style={styles.textLine}>{agitationText}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.recipeHeadline}>Water Type</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setWaterTypeText");
+          setActiveEditText(waterTypeText);
+        }}
+      >
+        <Text style={styles.textLine}>{waterTypeText}</Text>
+      </TouchableOpacity>
+
+
+      <Text style={styles.recipeHeadline}>Notes</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setNotesText");
+          setActiveEditText(notesText);
+        }}
+      >
+        <Text style={styles.textLine}>{notesText}</Text>
+      </TouchableOpacity>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       <TouchableOpacity
