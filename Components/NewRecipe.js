@@ -14,7 +14,7 @@ export const NewRecipe = ({ navigation, route }) => {
 
   const [onLoad, setOnLoad] = useState(false);
 
-  const [recipeNameText, setRecipeName] = useState("New Recipe");
+  const [recipeNameText, setRecipeNameText] = useState("New Recipe");
   const [methodText, setMethodText] = useState("");
   const [brandText, setBrandText] = useState("");
   const [roastText, setRoastText] = useState("");
@@ -27,6 +27,7 @@ export const NewRecipe = ({ navigation, route }) => {
   const [activeEdit, setActiveEdit] = useState(null);
   const [activeEditText, setActiveEditText] = useState("");
   const [editWindowOpen, setEditWindowOpen] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
 
   const [loadedRecipeArray, setLoadedRecipeArray] = useState([
@@ -66,7 +67,10 @@ export const NewRecipe = ({ navigation, route }) => {
       brand: brandText,
       roast: roastText,
       grind: grindText,
-      waterTemp: waterTempText
+      waterTemp: waterTempText,
+      agitation: agitationText,
+      waterType: waterTypeText,
+      notes: notesText,
     }
 
     let loadedRecipe;
@@ -95,6 +99,7 @@ export const NewRecipe = ({ navigation, route }) => {
 <Text style={styles.recipeHeadline}>Recipe Name</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setRecipeNameText");
           setActiveEditText(recipeNameText);
@@ -110,6 +115,7 @@ export const NewRecipe = ({ navigation, route }) => {
   onValueChange={(itemValue, itemIndex) =>
     setMethodText(itemValue)
   }>
+    <Picker.Item color="gray" enabled={false} label="Select Brewing Method" value="" />
   <Picker.Item label="Pourover" value="Pourover" />
   <Picker.Item label="French Press" value="French Press" />
   <Picker.Item label="Espresso" value="Espresso" />
@@ -233,17 +239,28 @@ export const NewRecipe = ({ navigation, route }) => {
       </TouchableOpacity> */}
       {/* <Text>{"\n"}{displayArray}</Text> */}
 
-      <View>
-        {editWindowOpen &&
+      
+        {/* {editWindowOpen && */}
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalRecipeVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalView}>
           <TextInput
             autoFocus={true}
             selectTextOnFocus={true}
             style={styles.input}
             value={activeEditText}
             onChangeText={setActiveEditText}
-            onEndEditing={() => { setEditWindowOpen(false); handleSubmit(eval(activeEdit), activeEditText) }}>
-          </TextInput>}
-      </View>
+            onEndEditing={() => { setModalVisible(false); handleSubmit(eval(activeEdit), activeEditText) }}>
+          </TextInput>
+          </View>
+          </Modal>
+      
 
 
 

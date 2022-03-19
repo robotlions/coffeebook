@@ -54,6 +54,11 @@ export const styles = StyleSheet.create({
       elevation: 5,
     },
 
+    pickerHeading:{
+      fontSize: 20,
+      fontWeight:"bold",
+    },
+
     textLine:{
       marginBottom: 5,
     },
