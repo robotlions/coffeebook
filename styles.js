@@ -18,11 +18,16 @@ export const styles = StyleSheet.create({
     buttonRow:{
       alignItems: "center",
     },
-  
+  categoryButton:{
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
   container: {
+    paddingTop: 10,
       flex: 1,
-      backgroundColor: '#fff',
-      // alignItems: 'center',
+      alignItems: 'center',
+      backgroundColor: "#ffffff",
       // justifyContent: 'center',
     },
 
@@ -35,7 +40,7 @@ export const styles = StyleSheet.create({
 
     modalView: {
       margin: 30,
-      backgroundColor: "#FFFFF3",
+      backgroundColor: "#FFFFFF",
       borderRadius: 20,
       padding: 15,
       alignItems: "center",
@@ -54,7 +59,12 @@ export const styles = StyleSheet.create({
     },
 
     touchableRecipe:{
-      
+     
+    },
+
+    recipeContainer:{
+      backgroundColor: "#ffffff",
+      flex: 1,
     },
 
     recipeHeadline:{

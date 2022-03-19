@@ -1,4 +1,4 @@
-import {Button, View, ScrollView} from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {styles} from '../styles';
 
 
@@ -6,61 +6,61 @@ import {styles} from '../styles';
 
 export const HomeScreen = ({ navigation }) => {
     return (
-        <ScrollView style={styles.container}>
-      <Button
+        <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity
         title="Pourover"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Pourover' })
+          navigation.navigate('Recipes', { filter: 'Pourover' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>Pourover</Text></TouchableOpacity>
+      <TouchableOpacity
         title="French Press"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'French Press' })
+          navigation.navigate('Recipes', { filter: 'French Press' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>French Press</Text></TouchableOpacity>
+      <TouchableOpacity
         title="Espresso"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Espresso' })
+          navigation.navigate('Recipes', { filter: 'Espresso' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>Espresso</Text></TouchableOpacity>
+      <TouchableOpacity
         title="AeroPress"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'AeroPress' })
+          navigation.navigate('Recipes', { filter: 'AeroPress' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>AeroPress</Text></TouchableOpacity>
+      <TouchableOpacity
         title="Drip Coffee Maker"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Drip' })
+          navigation.navigate('Recipes', { filter: 'Drip' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>Drip Coffee Maker</Text></TouchableOpacity>
+      <TouchableOpacity
         title="Moka Pot"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Moka Pot' })
+          navigation.navigate('Recipes', { filter: 'Moka Pot' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>Moka Pot</Text></TouchableOpacity>
+      <TouchableOpacity
         title="Percolator"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Percolator' })
+          navigation.navigate('Recipes', { filter: 'Percolator' })
         }
-      />
-      <Button
+      ><Text style={styles.categoryButton}>Percolator</Text></TouchableOpacity>
+      <TouchableOpacity
         title="Other"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'Other' })
+          navigation.navigate('Recipes', { filter: 'Other' })
         }
-      />
-       <Button
+      ><Text style={styles.categoryButton}>Other</Text></TouchableOpacity>
+       <TouchableOpacity
         title="New Recipe"
         onPress={() =>
           navigation.navigate('New Recipe')
         }
-      />
+      ><Text style={styles.categoryButton}>Create New Recipe</Text></TouchableOpacity>
       
       </ScrollView>
     );

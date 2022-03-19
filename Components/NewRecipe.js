@@ -91,7 +91,7 @@ export const NewRecipe = ({ navigation, route }) => {
 
 
   return (
-    <View>
+    <View style={styles.recipeContainer}>
 
 
       <Text style={styles.recipeHeadline}>Method: </Text>

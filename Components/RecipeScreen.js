@@ -71,11 +71,11 @@ export const RecipeScreen = ({ navigation, route}) => {
   }
 
 
-    return <View><ScrollView>
+    return <View style={styles.recipeContainer}><ScrollView>
   <Text>
     {route.params.filter}{"\n"}</Text>
     <Text>
-    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <TouchableOpacity style={styles.touchableRecipe} key={index} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}><Text>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}{"\n"}{"\n"}</Text></TouchableOpacity>))}
+    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <Text key={index}><TouchableOpacity style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}><Text>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}{"\n"}{"\n"}</Text></TouchableOpacity>{"\n"}</Text>))}
   </Text>
     </ScrollView>
 
