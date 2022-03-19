@@ -53,6 +53,10 @@ export const styles = StyleSheet.create({
       marginBottom: 5,
     },
 
+    touchableRecipe:{
+      
+    },
+
     recipeHeadline:{
       fontWeight: "bold",
       fontSize:16,

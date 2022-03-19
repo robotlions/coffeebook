@@ -83,6 +83,31 @@ export const NewRecipe = ({navigation, route}) => {
           // error reading value
         }
       }
+
+      async function saveRecipe() {
+        const newRecipe = {
+          method: methodText,
+            brand: brandText,
+          roast: roastText,
+        grind: grindText,
+      waterTemp: waterTempText}
+
+        let loadedRecipe;
+        (await AsyncStorage.getItem("recipeList")) == null
+          ? AsyncStorage.setItem("recipeList", JSON.stringify(newRecipe))
+          : AsyncStorage.getItem("recipeList")
+              .then((value) => JSON.parse(value))
+              .then((value) => (loadedRecipe = value))
+              .then(() => loadedRecipe.push(newRecipe))
+              .then(() =>
+                AsyncStorage.setItem("recipeList", JSON.stringify(loadedRecipe))
+              )
+              .then(() => getArray());
+        
+        alert("Recipe Added!");
+          // setRecipeName("");setRatio("");setGrindSize("");setAgitation("");setTemperature("");setBrewStyle("");setRecipeGenerated(false);
+        
+      }
     
       const displayArray = loadedRecipeArray.map((value, index) => (<Text key={index}>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
       // const displayArray = testLoadArray.map((value, index) => (<Text key={index}>Method: {value.method}{"\n"}Brand: {value.brand}{"\n"}Roast: {value.roast}{"\n"}Grind: {value.grind}{"\n"}Water Temp: {value.waterTemp}</Text>));
@@ -168,14 +193,14 @@ export const NewRecipe = ({navigation, route}) => {
       
     
       <TouchableOpacity
-      onPress={()=>{alert("saved?");storeData()}}
+      onPress={()=>{saveRecipe()}}
       style={styles.buttonRow}><Text style={styles.button}>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
       onPress={()=>{alert("loaded?");loadData()}}
       style={styles.buttonRow}><Text style={styles.button}>Load</Text>
-      </TouchableOpacity>
-      <Text>{"\n"}{displayArray}</Text>
+      </TouchableOpacity> */}
+      {/* <Text>{"\n"}{displayArray}</Text> */}
 
       <View>
 {editWindowOpen && 
