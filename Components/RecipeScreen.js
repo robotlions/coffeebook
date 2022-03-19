@@ -1,5 +1,4 @@
 import {View, ScrollView, Text, Modal, TouchableOpacity, Alert} from 'react-native';
-import { testLoadArray } from './DefaultRecipes';
 import {useState, useEffect} from 'react';
 import {styles} from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,7 +14,6 @@ export const RecipeScreen = ({ navigation, route}) => {
     
   const [loadedRecipeArray, setLoadedRecipeArray] = useState([{method: "", brand: "", roast: "", grind: "", waterTemp: ""}])
 
-  const [loadedIndex, setLoadedIndex] = useState(null);
 
     function activateModal(value){
         setModalVisible(true);
@@ -64,7 +62,6 @@ export const RecipeScreen = ({ navigation, route}) => {
   }
 
   function alertDeleteRecipe(index) {
-    // let index = loadedIndex;
     let data = loadedRecipeArray;
     data.splice(index, 1);
     setTimeout(async () => {

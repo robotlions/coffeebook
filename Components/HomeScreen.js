@@ -50,9 +50,9 @@ export const HomeScreen = ({ navigation }) => {
         }
       />
       <Button
-        title="Custom"
+        title="Other"
         onPress={() =>
-          navigation.navigate('Recipe', { filter: 'custom' })
+          navigation.navigate('Recipe', { filter: 'Other' })
         }
       />
        <Button
