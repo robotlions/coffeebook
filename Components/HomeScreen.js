@@ -55,6 +55,12 @@ export const HomeScreen = ({ navigation }) => {
           navigation.navigate('Recipe', { filter: 'custom' })
         }
       />
+       <Button
+        title="New Recipe"
+        onPress={() =>
+          navigation.navigate('New Recipe')
+        }
+      />
       
       </ScrollView>
     );
