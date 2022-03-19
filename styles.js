@@ -19,14 +19,25 @@ export const styles = StyleSheet.create({
       alignItems: "center",
     },
   categoryButton:{
+    paddingLeft: 15,
+    height: 50,
     fontSize: 25,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#9f8d73",
+    backgroundColor: "#f2e5bb",
+    width: "100%",
+    textShadowColor: "rgba(0, 0, 0, .4)",
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 4,
   },
   container: {
     paddingTop: 10,
       flex: 1,
-      alignItems: 'center',
+      // alignItems: 'center',
       backgroundColor: "#ffffff",
       // justifyContent: 'center',
     },
@@ -75,5 +86,20 @@ export const styles = StyleSheet.create({
     recipeHeadline:{
       fontWeight: "bold",
       fontSize:16,
-    }
+    },
+
+    recipeHeading:{
+      height: 50,
+      textAlign: "center",
+      fontSize: 25,
+      fontWeight: "bold",
+      color: "#9f8d73",
+      backgroundColor: "#f2e5bb",
+      textShadowColor: "rgba(0, 0, 0, .25)",
+      textShadowOffset: {
+        width: 1,
+        height: 2,
+      },
+      textShadowRadius: 4,
+    },
   });

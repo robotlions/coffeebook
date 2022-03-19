@@ -72,7 +72,7 @@ export const RecipeScreen = ({ navigation, route}) => {
 
 
     return <View style={styles.recipeContainer}><ScrollView>
-  <Text>
+  <Text style={styles.recipeHeading}>
     {route.params.filter}{"\n"}</Text>
     <Text>
     {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <Text key={index}><TouchableOpacity style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}>
