@@ -18,13 +18,13 @@ export default function App() {
   
   return (
     <NavigationContainer>
-       <StatusBar backgroundColor="#9f8d73" style="auto" />
+       <StatusBar style="auto" />
       <Stack.Navigator>
     
     <Stack.Screen
       name="Home"
       component={HomeScreen}
-      options={{ title: 'Coffeebook Home' }}
+      options={{ title: 'Coffeebook Home',headerStyle: {backgroundColor: '#d9bda5'},headerTintColor: '#f6eee3',headerTitleStyle:{fontWeight: "bold", fontSize: 30} }}
     />
     <Stack.Screen name="Recipes" component={RecipeScreen} />
     <Stack.Screen name="New Recipe" component={NewRecipe}/>

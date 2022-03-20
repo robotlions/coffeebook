@@ -8,6 +8,11 @@ grind: "",
 waterTemp: "",
 agitation: "",
 waterType: "",
+milkType: "",
+milkConsistency: "",
+addedWaterAmount: "",
+sweetenerType: "",
+sweetenerAmount: "",
 notes: "",
 
 
