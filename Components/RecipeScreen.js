@@ -71,25 +71,24 @@ export const RecipeScreen = ({ navigation, route}) => {
   }
 
 
-    return <View style={styles.recipeContainer}><ScrollView>
+    return <ScrollView contentContainerStyle={styles.recipeContainer}>
   <Text style={styles.recipeHeading}>
     {route.params.filter}{"\n"}</Text>
-    <Text>
-    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <Text key={index}><TouchableOpacity style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}>
-      <Text>Method: {value.method}{"\n"}
-      Brand: {value.brand}{"\n"}
-      Roast: {value.roast}{"\n"}
-      Grind: {value.grind}{"\n"}
-      Water Temp: {value.waterTemp}{"\n"}
-      Agitation: {value.agitation}{"\n"}
-      Water Type: {value.waterType}{"\n"}
-      Notes: {value.notes}{"\n"}
-      {"\n"}</Text></TouchableOpacity>{"\n"}</Text>))}
-  </Text>
-    </ScrollView>
+    
+    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <TouchableOpacity key={index} style={styles.touchableRecipe} onLongPress={()=>deleteAlert(index)} onPress={()=>activateModal(value)}>
+      <Text style={styles.recipeHeadline}>
+      {value.recipeName}</Text>
+      <Text>
+      {value.method}{"\n"}
+      <Text style={{fontStyle: "italic"}}>
+      {value.notes}
+      </Text>
+      </Text></TouchableOpacity>))}
+  
 
 
-    <Modal
+
+      <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -99,6 +98,7 @@ export const RecipeScreen = ({ navigation, route}) => {
       >
         <View style={styles.backgroundView}>
         <View style={styles.modalView}>
+            <Text>Name: {loadedArray.recipeName}</Text>
             <Text>Method: {loadedArray.method}</Text>
             <Text>Brand: {loadedArray.brand}</Text>
             <Text>Roast: {loadedArray.roast}</Text>
@@ -106,10 +106,18 @@ export const RecipeScreen = ({ navigation, route}) => {
             <Text>Water Temp: {loadedArray.waterTemp}</Text>
             <Text>Agitaiton: {loadedArray.agitation}</Text>
             <Text>Water Type: {loadedArray.waterType}</Text>
+            <Text>Added Water: {loadedArray.addedWaterAmount}</Text>
+            <Text>Milk Type: {loadedArray.milkType}</Text>
+            <Text>Milk Consistency: {loadedArray.milkConsistency}</Text>
+            <Text>Sweetener Type: {loadedArray.sweetenerType}</Text>
+            <Text>Sweetner Amount: {loadedArray.sweetenerAmount}</Text>
             <Text>Notes: {loadedArray.notes}{"\n"}</Text>
             <TouchableOpacity onPress={()=>setModalVisible(false)}><Text>Close Modal</Text></TouchableOpacity>
             </View></View></Modal>
+    </ScrollView>
 
 
-    </View>
+    
+
+
   };

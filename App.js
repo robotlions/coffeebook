@@ -24,7 +24,7 @@ export default function App() {
     <Stack.Screen
       name="Home"
       component={HomeScreen}
-      options={{ title: 'Coffeebook Home',headerStyle: {backgroundColor: '#d9bda5'},headerTintColor: '#f6eee3',headerTitleStyle:{fontWeight: "bold", fontSize: 30} }}
+      options={{ title: 'Coffeebook Home'}}
     />
     <Stack.Screen name="Recipes" component={RecipeScreen} />
     <Stack.Screen name="New Recipe" component={NewRecipe}/>

@@ -22,7 +22,13 @@ export const NewRecipe = ({ navigation, route }) => {
   const [waterTempText, setWaterTempText] = useState("");
   const [agitationText, setAgitationText] = useState("");
   const [waterTypeText, setWaterTypeText] = useState("");
-  const [notesText, setNotesText] = useState("");
+  const [notesText, setNotesText] = useState("Edit to add description");
+  const [addedWaterAmountText, setAddedWaterAmountText] = useState("");
+  const [milkTypeText, setMilkTypeText] = useState("");
+  const [milkConsistencyText, setMilkConsistencyText] = useState("");
+  const [sweetenerTypeText, setSweetenerTypeText] = useState("");
+  const [sweetenerAmountText, setSweetenerAmountText] = useState("")
+
 
   const [activeEdit, setActiveEdit] = useState(null);
   const [activeEditText, setActiveEditText] = useState("");
@@ -63,6 +69,7 @@ export const NewRecipe = ({ navigation, route }) => {
 
   async function saveRecipe() {
     const newRecipe = {
+      recipeName: recipeNameText,
       method: methodText,
       brand: brandText,
       roast: roastText,
@@ -70,6 +77,11 @@ export const NewRecipe = ({ navigation, route }) => {
       waterTemp: waterTempText,
       agitation: agitationText,
       waterType: waterTypeText,
+      addedWaterAmount: addedWaterAmountText,
+      milkType: milkTypeText,
+      milkConsistency: milkConsistencyText,
+      sweetenerType: sweetenerTypeText,
+      sweetenerAmount: sweetenerAmountText,
       notes: notesText,
     }
 
@@ -94,7 +106,8 @@ export const NewRecipe = ({ navigation, route }) => {
 
 
   return (
-    <View style={styles.recipeContainer}>
+    
+    <ScrollView>
 
 <Text style={styles.recipeHeadline}>Recipe Name</Text>
       <TouchableOpacity
@@ -131,6 +144,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Coffee Brand</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setBrandText");
           setActiveEditText(brandText);
@@ -143,6 +157,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Roast</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setRoastText");
           setActiveEditText(roastText);
@@ -155,6 +170,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Grind</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setGrindText");
           setActiveEditText(grindText);
@@ -167,6 +183,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Water Temp</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setWaterTempText");
           setActiveEditText(waterTempText);
@@ -179,6 +196,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Agitation</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setAgitationText");
           setActiveEditText(agitationText);
@@ -190,6 +208,7 @@ export const NewRecipe = ({ navigation, route }) => {
       <Text style={styles.recipeHeadline}>Water Type</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setWaterTypeText");
           setActiveEditText(waterTypeText);
@@ -198,10 +217,71 @@ export const NewRecipe = ({ navigation, route }) => {
         <Text style={styles.textLine}>{waterTypeText}</Text>
       </TouchableOpacity>
 
+      <Text style={styles.recipeHeadline}>Added Water</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setAddedWaterAmountText");
+          setActiveEditText(addedWaterAmountText);
+        }}
+      >
+        <Text style={styles.textLine}>{addedWaterAmountText}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.recipeHeadline}>Milk Type</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setMilkTypeText");
+          setActiveEditText(milkTypeText);
+        }}
+      >
+        <Text style={styles.textLine}>{milkTypeText}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.recipeHeadline}>Milk Consistency</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setMilkConsistencyText");
+          setActiveEditText(milkConsistencyText);
+        }}
+      >
+        <Text style={styles.textLine}>{milkConsistencyText}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.recipeHeadline}>Sweetener Type</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setSweetnerTypeText");
+          setActiveEditText(sweetenerTypeText);
+        }}
+      >
+        <Text style={styles.textLine}>{sweetenerTypeText}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.recipeHeadline}>Sweetener Amount</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(!modalVisible);
+          setEditWindowOpen(!editWindowOpen);
+          setActiveEdit("setSweetenerAmountText");
+          setActiveEditText(sweetenerAmountText);
+        }}
+      >
+        <Text style={styles.textLine}>{sweetenerAmountText}</Text>
+      </TouchableOpacity>
+
 
       <Text style={styles.recipeHeadline}>Notes</Text>
       <TouchableOpacity
         onPress={() => {
+          setModalVisible(!modalVisible);
           setEditWindowOpen(!editWindowOpen);
           setActiveEdit("setNotesText");
           setActiveEditText(notesText);
@@ -269,6 +349,6 @@ export const NewRecipe = ({ navigation, route }) => {
 
 
 
-    </View>
+    </ScrollView>
   )
 }

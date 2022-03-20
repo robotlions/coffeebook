@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
 
   button: {
     textAlign: "center",
-    backgroundColor: "lightblue",
     width: 120,
     height: 25,
+    backgroundColor: "#eaeaea",
+    elevation: 4,
   },
 
   buttonRow: {
@@ -26,16 +27,10 @@ export const styles = StyleSheet.create({
     height: 100,
     width: 100,
     margin: 10,
-    color: "#f6eee3",
-    backgroundColor: "#d9bda5",
-    // textShadowColor: "rgba(0, 0, 0, .4)",
-    // textShadowOffset: {
-    //   width: 1,
-    //   height: 1,
-    // },
-    // textShadowRadius: 4,
+    color: "#000000",
     textAlignVertical: "center",
-    elevation: 5,
+    backgroundColor: "#eaeaea",
+    elevation: 4,
   },
 
 
@@ -43,7 +38,7 @@ export const styles = StyleSheet.create({
     paddingTop: 10,
     flex: 1,
     alignItems: 'center',
-    // backgroundColor: "#ffffff",
+    backgroundColor: "#ffffff",
     justifyContent: 'center',
     flexDirection: "row",
     flexWrap: "wrap",
@@ -85,6 +80,7 @@ export const styles = StyleSheet.create({
   recipeHeadline: {
     fontWeight: "bold",
     fontSize: 16,
+    color: "#000000",
   },
 
   recipeHeading: {
@@ -92,22 +88,17 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 25,
     fontWeight: "bold",
-    color: "#9f8d73",
-    backgroundColor: "#f2e5bb",
-    textShadowColor: "rgba(0, 0, 0, .25)",
-    textShadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    textShadowRadius: 4,
-  },
+    color: "#000000",
+   },
+
 
   textLine: {
     marginBottom: 5,
   },
 
   touchableRecipe: {
-
+    backgroundColor: "#eaeaea",
+    marginBottom: 10,
   },
 
 
