@@ -18,28 +18,34 @@ export const styles = StyleSheet.create({
     buttonRow:{
       alignItems: "center",
     },
+
   categoryButton:{
-    paddingLeft: 15,
-    height: 50,
-    fontSize: 25,
+    textAlign: "center",
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
+    height: 100,
+    width: 100,
+    margin: 10,
     color: "#9f8d73",
     backgroundColor: "#f2e5bb",
-    width: "100%",
     textShadowColor: "rgba(0, 0, 0, .4)",
     textShadowOffset: {
       width: 1,
       height: 1,
     },
     textShadowRadius: 4,
+    textAlignVertical: "center",
   },
+
+
   container: {
-    paddingTop: 10,
+    paddingTop: 20,
       flex: 1,
-      // alignItems: 'center',
+      alignItems: 'center',
       backgroundColor: "#ffffff",
-      // justifyContent: 'center',
+      justifyContent: 'center',
+      flexDirection: "row",
+      flexWrap: "wrap",
     },
 
     input: {

@@ -1,5 +1,6 @@
 import { Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {styles} from '../styles';
+import Carousel from 'react-native-snap-carousel';
 
 
 
