@@ -9,9 +9,12 @@ export const styles = StyleSheet.create({
   },
 
   button: {
+    marginTop: 10,
+    marginBottom: 20,
+    fontSize: 20,
     textAlign: "center",
     width: 120,
-    height: 25,
+    height: 35,
     backgroundColor: "#eaeaea",
     elevation: 4,
   },
@@ -99,6 +102,7 @@ export const styles = StyleSheet.create({
   touchableRecipe: {
     backgroundColor: "#eaeaea",
     marginBottom: 10,
+    paddingLeft:15,
   },
 
 
