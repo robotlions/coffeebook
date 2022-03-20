@@ -15,9 +15,10 @@ export const RecipeScreen = ({ navigation, route }) => {
   const [loadedRecipeArray, setLoadedRecipeArray] = useState([{ method: "", brand: "", roast: "", grind: "", waterTemp: "" }])
 
 
-  function activateModal(value) {
+  function activateModal(value, index) {
     setModalVisible(true);
     setLoadedArray({ 
+      index: index,
       recipeName: value.recipeName, 
       method: value.method, 
       brand: value.brand, 
@@ -89,7 +90,7 @@ export const RecipeScreen = ({ navigation, route }) => {
     <Text style={styles.recipeHeading}>
       {route.params.filter}{"\n"}</Text>
 
-    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <TouchableOpacity key={index} style={styles.touchableRecipe} onLongPress={() => deleteAlert(index)} onPress={() => activateModal(value)}>
+    {loadedRecipeArray.map((value, index) => (route.params.filter == value.method && <TouchableOpacity key={index} style={styles.touchableRecipe} onLongPress={() => deleteAlert(index)} onPress={() => activateModal(value, index)}>
       <Text style={styles.recipeHeadline}>
         {value.recipeName}</Text>
       <Text>
@@ -126,7 +127,9 @@ export const RecipeScreen = ({ navigation, route }) => {
           <Text>Sweetener Type: {loadedArray.sweetenerType}</Text>
           <Text>Sweetner Amount: {loadedArray.sweetenerAmount}</Text>
           <Text>Notes: {loadedArray.notes}{"\n"}</Text>
-          <TouchableOpacity onPress={() => setModalVisible(false)}><Text style={styles.button}>Close Modal</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(false)}><Text style={styles.button}>Done</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() =>
+          navigation.navigate('Edit Recipe', {array: loadedArray})}><Text style={styles.button}>Edit</Text></TouchableOpacity>
         </View></View></Modal>
   </ScrollView>
 

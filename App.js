@@ -7,6 +7,7 @@ import { RecipeScreen } from "./Components/RecipeScreen";
 import { styles } from "./styles";
 import {HomeScreen} from './Components/HomeScreen';
 import { NewRecipe } from "./Components/NewRecipe";
+import {EditRecipe} from "./Components/EditRecipe";
 
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +29,7 @@ export default function App() {
     />
     <Stack.Screen name="Recipes" component={RecipeScreen} />
     <Stack.Screen name="New Recipe" component={NewRecipe}/>
+    <Stack.Screen name="Edit Recipe" component={EditRecipe}/>
   </Stack.Navigator>
     
 

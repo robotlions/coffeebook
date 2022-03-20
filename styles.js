@@ -59,7 +59,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderRadius: 20,
     padding: 15,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
